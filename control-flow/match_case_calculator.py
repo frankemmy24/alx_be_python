@@ -5,7 +5,7 @@ operator = input("Choose the operation (+, -, *, /): ")
 match operator:
     case "+":
         result = num1 + num2
-        print (f"The result is {result}.")
+        print(f"The result is {result}.")
     case "-":
         result = num1 - num2
         print(f"The result is {result}.")
@@ -19,6 +19,6 @@ match operator:
             result = num1 / num2
             print(f"The result is {result}.")
     case _:
-        print ("invalid operation selected.")
+        print("invalid operation selected.")
 
     
