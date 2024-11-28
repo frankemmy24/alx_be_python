@@ -1,28 +1,40 @@
+# main-0.py
+
 import sys
 from bank_account import BankAccount
 
 def main():
-    account = BankAccount(100)  # Example starting balance
-    if len(sys.argv) < 2:
-        print("Usage: python main.py <command>:<amount>")
-        print("Commands: deposit, withdraw, display")
-        sys.exit(1)
+    # Ensure correct number of arguments
+    if len(sys.argv) < 3:
+        print("Usage: python main-0.py <operation> <amount>")
+        print("Operations: deposit, withdraw, display")
+        return
 
-    command, *params = sys.argv[1].split(':')
-    amount = float(params[0]) if params else None
+    # Parse command-line arguments
+    operation = sys.argv[1].lower()
+    amount = float(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else None
 
-    if command == "deposit" and amount is not None:
-        account.deposit(amount)
-        print(f"Deposited: ${amount}")
-    elif command == "withdraw" and amount is not None:
-        if account.withdraw(amount):
-            print(f"Withdrew: ${amount}")
+    # Initialize BankAccount with an optional initial balance
+    account = BankAccount()
+
+    # Perform the requested operation
+    if operation == "deposit":
+        if amount is not None:
+            account.deposit(amount)
+            print(f"Deposited: ${amount:.2f}")
         else:
-            print("Insufficient funds.")
-    elif command == "display":
+            print("Invalid deposit amount.")
+    elif operation == "withdraw":
+        if amount is not None:
+            success = account.withdraw(amount)
+            if success:
+                print(f"Withdrew: ${amount:.2f}")
+        else:
+            print("Invalid withdrawal amount.")
+    elif operation == "display":
         account.display_balance()
     else:
-        print("Invalid command.")
+        print("Invalid operation. Please choose deposit, withdraw, or display.")
 
 if __name__ == "__main__":
     main()
