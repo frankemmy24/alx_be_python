@@ -3,10 +3,7 @@ class BankAccount:
         self._account_balance = initial_balance
 
     def deposit(self,amount):
-        if amount <= 0:
-            print("deposit must a natural number")
-        else: 
-            self._account_balance += amount
+        self._account_balance += amount
 
     def withdraw(self, amount):
         if amount > 0 and self._account_balance > amount:
